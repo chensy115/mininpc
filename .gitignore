@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Environment and credentials
+.env
+.env.*
+!.env.example
+
+# Runtime databases and generated data
+data/*
+!data/.gitkeep
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+
+# Logs and test artifacts
+logs/
+artifacts/
+
+# Local agent/design tooling
+.agents/
+.impeccable/

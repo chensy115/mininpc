@@ -1,0 +1,2 @@
+"""MiniWorld test suite."""
+

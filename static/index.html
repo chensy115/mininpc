@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#245847">
+  <title>MiniWorld · 活体世界观测站</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+  <header class="topbar" id="page-top">
+    <div class="brand-lockup">
+      <span class="brand-version">自主社会模拟器</span>
+      <h1>MINI<span>WORLD</span></h1>
+      <p>一张持续运行、可解释、可安全控制的社会模拟研究台。</p>
+    </div>
+    <div class="clock-panel" aria-label="世界时钟与模拟控制">
+      <div class="clock-status-line">
+        <div id="world-clock" class="world-clock" aria-live="polite">正在载入世界…</div>
+        <div class="status"><span id="status-dot" aria-hidden="true"></span><span id="status-text">正在连接</span></div>
+      </div>
+      <div class="controls" aria-label="模拟控制">
+        <button id="pause-button" class="primary-control" type="button">暂停</button>
+        <div class="speed-group" role="group" aria-label="模拟速度">
+          <button class="speed active" data-speed="1" type="button" aria-pressed="true">1×</button>
+          <button class="speed" data-speed="5" type="button" aria-pressed="false">5×</button>
+          <button class="speed" data-speed="20" type="button" aria-pressed="false">20×</button>
+        </div>
+        <details class="danger-menu">
+          <summary>危险操作</summary>
+          <button id="reset-button" class="danger" type="button">重置当前世界</button>
+        </details>
+      </div>
+    </div>
+  </header>
+
+  <nav class="section-nav" aria-label="仪表盘区域">
+    <a href="#overview">安全与世界</a>
+    <a href="#npcs">五位 NPC</a>
+    <a href="#pulse">世界脉搏</a>
+    <a href="#trends">趋势</a>
+    <a href="#audit">深度审计</a>
+  </nav>
+
+  <main id="main-content">
+    <section id="overview" class="page-section overview-section" aria-labelledby="overview-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="overview-title">安全与运行状态</h2>
+          <p>先确认世界是否安全推进，再进入人物与趋势。</p>
+        </div>
+        <span id="overview-freshness" class="freshness" aria-live="polite">正在同步</span>
+      </div>
+
+      <div class="module-sync-line"><strong>运行安全</strong><span id="runtime-freshness" class="freshness module-freshness" aria-live="polite">正在同步</span></div>
+      <div id="runtime-overview" class="runtime-overview" aria-busy="true">
+        <p class="empty">正在载入在线自治、队列与费用保护状态…</p>
+      </div>
+
+      <article class="world-card" aria-labelledby="world-title">
+        <div class="card-heading">
+          <div>
+            <h2 id="world-title">世界总览</h2>
+            <p>四个生活场所与此刻正在发生的行动。</p>
+          </div>
+          <div class="card-heading-actions"><span id="world-freshness" class="freshness module-freshness" aria-live="polite">正在同步</span><a class="text-link" href="#pulse">查看关键变化</a></div>
+        </div>
+        <div id="locations" class="locations" aria-busy="true"></div>
+      </article>
+    </section>
+
+    <section id="npcs" class="page-section" aria-labelledby="npcs-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="npcs-title">五位 NPC</h2>
+          <p>固定顺序扫读每个人的位置、行动、核心状态和 Agent 来源。</p>
+        </div>
+        <span id="npc-freshness" class="freshness" aria-live="polite">正在同步</span>
+      </div>
+      <div id="npc-overview" class="npc-overview-grid" aria-busy="true">
+        <p class="empty">正在载入人物状态…</p>
+      </div>
+    </section>
+
+    <section id="pulse" class="page-section" aria-labelledby="pulse-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="pulse-title">世界脉搏</h2>
+          <p>按时间阅读已提交事实及其叙事解释，不让模型文字覆盖 Engine 记录。</p>
+        </div>
+        <div class="pulse-tools">
+          <label for="event-filter">筛选</label>
+          <select id="event-filter">
+            <option value="all">全部变化</option>
+            <option value="people">人物与关系</option>
+            <option value="economy">经济与职业</option>
+            <option value="system">系统与时间</option>
+          </select>
+          <span id="event-count" class="counter">0 条事件</span>
+        </div>
+      </div>
+      <article class="events-card">
+        <div id="events" class="events" aria-busy="true"></div>
+        <div class="region-footer"><span id="pulse-freshness" class="freshness" aria-live="polite">正在同步</span></div>
+      </article>
+    </section>
+
+    <section id="trends" class="page-section" aria-labelledby="trends-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="trends-title">社会趋势</h2>
+          <p>低频信息按需展开；已展开模块每 30 秒独立刷新。</p>
+        </div>
+      </div>
+      <div class="disclosure-stack">
+        <details class="data-disclosure" data-trend-group="product">
+          <summary><span><strong>产品与平衡</strong><small>存档、世界统计、平衡审计与新手引导</small></span><span class="disclosure-state">按需载入</span></summary>
+          <section id="product-overview" class="trend-panel" aria-live="polite"><p class="empty">展开后载入产品状态与统计。</p></section>
+        </details>
+        <details class="data-disclosure" data-trend-group="economy">
+          <summary><span><strong>社会经济</strong><small>职业、工资、社区商店与消费闭环</small></span><span class="disclosure-state">按需载入</span></summary>
+          <section id="economy-overview" class="trend-panel" aria-live="polite"><p class="empty">展开后载入社会经济。</p></section>
+        </details>
+        <details class="data-disclosure" data-trend-group="career">
+          <summary><span><strong>职业与预算</strong><small>绩效、就业、个人预算与压力</small></span><span class="disclosure-state">按需载入</span></summary>
+          <section id="career-overview" class="trend-panel" aria-live="polite"><p class="empty">展开后载入职业与预算。</p></section>
+        </details>
+        <details class="data-disclosure" data-trend-group="community">
+          <summary><span><strong>社区节奏</strong><small>营业、设施、排班、补货、培训与住房</small></span><span class="disclosure-state">按需载入</span></summary>
+          <section id="community-overview" class="trend-panel" aria-live="polite"><p class="empty">展开后载入社区节奏。</p></section>
+        </details>
+        <details class="data-disclosure" data-trend-group="social">
+          <summary><span><strong>关系与共同生活</strong><small>信任、承诺、朋友圈和有限合住</small></span><span class="disclosure-state">按需载入</span></summary>
+          <section id="social-overview" class="trend-panel" aria-live="polite"><p class="empty">展开后载入关系网络。</p></section>
+        </details>
+        <details class="data-disclosure" data-trend-group="story">
+          <summary><span><strong>人生故事</strong><small>里程碑、周期总结、因果链与回放</small></span><span class="disclosure-state">按需载入</span></summary>
+          <section id="story-overview" class="trend-panel" aria-live="polite"><p class="empty">展开后载入人生故事。</p></section>
+        </details>
+      </div>
+    </section>
+
+    <section id="audit" class="page-section" aria-labelledby="audit-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="audit-title">深度分析与审计</h2>
+          <p>控制、会话、认知和来源证据集中在这里；默认保持安静。</p>
+        </div>
+      </div>
+      <div class="disclosure-stack">
+        <details class="data-disclosure" data-audit-group="agents">
+          <summary><span><strong>五人 Agent 接管</strong><small>独立上下文、最终行动、fallback 与近期审计</small></span><span class="disclosure-state">持续同步摘要</span></summary>
+          <section id="agent-overview" class="audit-panel" aria-live="polite"><p class="empty">正在载入五个独立 Agent 状态…</p></section>
+        </details>
+        <details class="data-disclosure" data-audit-group="conversations">
+          <summary><span><strong>多轮社交会话</strong><small>逐人上下文、会话队列与事实边界</small></span><span class="disclosure-state">按需载入</span></summary>
+          <section id="conversation-overview" class="audit-panel" aria-live="polite"><p class="empty">展开后载入会话审计。</p></section>
+        </details>
+        <details class="data-disclosure" data-audit-group="cognition">
+          <summary><span><strong>每日反思与计划</strong><small>主观信念、证据和 Engine 跟踪计划</small></span><span class="disclosure-state">按需载入</span></summary>
+          <section id="cognition-overview" class="audit-panel" aria-live="polite"><p class="empty">展开后载入认知审计。</p></section>
+        </details>
+      </div>
+      <aside class="about-card">
+        <div>
+          <h2>规则驱动，而非预设剧本。</h2>
+          <p>Simulation Engine 始终固化事实并校验动作。在线 Provider 只有在明确开启、预算和安全门禁全部放行后才参与；模型文本不能直接改变关系、金钱、物品、地点或行动。</p>
+        </div>
+        <div>
+          <div id="narrative-status" class="narrative-status">叙事状态将在世界脉搏同步后显示。</div>
+          <div class="legend" aria-label="地点图例">
+            <span><i class="dot home"></i>家</span><span><i class="dot office"></i>办公室</span>
+            <span><i class="dot cafe"></i>咖啡馆</span><span><i class="dot park"></i>公园</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="npc-name" aria-describedby="npc-record-description">
+    <button class="modal-backdrop" type="button" data-close="true" aria-label="关闭人物观察档案"></button>
+    <article class="npc-record" tabindex="-1">
+      <header class="record-toolbar">
+        <div>
+          <span class="record-context">NPC 观察档案</span>
+          <span id="npc-record-description" class="sr-only">使用标签在人物概览、决策、生活经济、关系社交、记忆人生之间切换。</span>
+        </div>
+        <div class="record-actions">
+          <button type="button" data-npc-step="previous" aria-label="上一位 NPC">上一位</button>
+          <button type="button" data-npc-step="next" aria-label="下一位 NPC">下一位</button>
+          <button class="close" type="button" data-close="true" aria-label="关闭观察档案">关闭</button>
+        </div>
+      </header>
+      <div id="npc-record-header" class="record-header"><p class="empty">正在载入人物…</p></div>
+      <nav id="npc-tabs" class="record-tabs" role="tablist" aria-label="人物观察档案分区"></nav>
+      <div id="npc-tab-status" class="record-status" aria-live="polite"></div>
+      <div id="npc-detail" class="record-content" role="tabpanel" tabindex="0"></div>
+    </article>
+  </div>
+
+  <div id="runtime-config-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="runtime-config-title" aria-describedby="runtime-config-description">
+    <button class="modal-backdrop" type="button" data-runtime-config-close="true" aria-label="关闭模型配置"></button>
+    <article class="runtime-config" tabindex="-1">
+      <header class="runtime-config-head">
+        <div>
+          <h2 id="runtime-config-title">配置在线模型</h2>
+          <p id="runtime-config-description">连接兼容 OpenAI Chat Completions 的模型服务。</p>
+        </div>
+        <button class="runtime-config-close" type="button" data-runtime-config-close="true">关闭</button>
+      </header>
+      <form id="runtime-config-form" autocomplete="off">
+        <div class="runtime-config-field">
+          <label for="runtime-api-key">API Key</label>
+          <div class="runtime-secret-field">
+            <input id="runtime-api-key" name="api_key" type="password" required maxlength="4096" autocomplete="new-password" spellcheck="false">
+            <button id="runtime-key-visibility" type="button" aria-controls="runtime-api-key" aria-pressed="false">显示</button>
+          </div>
+          <small>仅发送到当前电脑上的 MiniWorld 服务，不写入数据库、日志或浏览器存储。</small>
+        </div>
+        <div class="runtime-config-field">
+          <label for="runtime-base-url">接口地址</label>
+          <input id="runtime-base-url" name="base_url" type="url" required maxlength="2048" placeholder="https://api.deepseek.com" spellcheck="false">
+          <small>远程服务必须使用 HTTPS；本机模型服务可以使用 HTTP。</small>
+        </div>
+        <div class="runtime-config-field">
+          <label for="runtime-model">模型名称</label>
+          <input id="runtime-model" name="model" type="text" required maxlength="200" placeholder="按服务商控制台中的模型 ID 填写" spellcheck="false">
+        </div>
+        <aside class="runtime-memory-note">
+          <strong>只对本次运行有效</strong>
+          <span>服务重启后配置自动清除，需要重新填写。保存配置不会立即产生模型调用。</span>
+        </aside>
+        <p id="runtime-config-status" class="runtime-config-status" role="status" aria-live="polite"></p>
+        <div class="runtime-config-actions">
+          <button type="button" data-runtime-config-close="true">取消</button>
+          <button class="primary" type="submit">保存到本次运行</button>
+        </div>
+      </form>
+    </article>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  <script src="/static/js/dashboard-snapshots.js" defer></script>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
