@@ -2,6 +2,8 @@
 
 MiniWorld 是一个持续运行、可解释、可观察的自主 NPC 世界。V1.6 是这一阶段的最终版本：它在完整保留 V0.1–V1.5 的基础上，为五位 NPC 的受限决策、多轮会话和每日反思提供一个共享但按 `npc_id/task_type` 隔离的 DeepSeek/OpenAI-compatible 在线运行时。在线自治必须由用户显式开启；只有运行时处于 `online`、目标 NPC 已启用、预算/限流/熔断全部放行时才会发出请求。无 Key、默认关闭、暂停、急停、预算耗尽或 Provider 故障时，世界继续由 Utility/确定性人格安全回退。Simulation Engine 始终独占客观事实和动作执行。
 
+项目从立项、分版本实现到测试交付的完整复盘、可复用 SOP 和文档模板见 [`docs/PROJECT_KNOWLEDGE_BASE.md`](docs/PROJECT_KNOWLEDGE_BASE.md)。
+
 ## V1.6 安全在线运行
 
 MiniWorld 不从 `.env` 文件自动加载秘密。真实 Key 只能存在于本机服务进程的环境或临时内存中，SQLite、日志和运行审计只显示 `configured: true/false`。不要把 Key 粘贴到聊天、代码、数据库、日志、脚本参数或 `.env.example`。
